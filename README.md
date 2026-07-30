@@ -111,6 +111,58 @@ The skill guides the agent toward:
 
 > Evaluate the result across visual hierarchy, material fidelity, lighting, animation, interaction feedback, performance, and consistency. Fix must-have failures first, retest after each pass, and stop when all required checks pass. Record lower-priority gaps instead of iterating indefinitely.
 
+### Case study: from “I want to make a game” to a production brief
+
+The starting prompt is almost empty:
+
+```text
+I want to make a game.
+```
+
+That sentence expresses desire, but leaves the agent guessing the genre, quality bar, technical stack, work breakdown, review process, and definition of done.
+
+The ambitious version changes the conversation completely:
+
+<details>
+<summary>Open the full game prompt</summary>
+
+```text
+I want you to build a first-person shooter at the level of the most recent Call of Duty games. It should be utterly perfect, visually beautiful, with every single thing done at AAA quality—from textures to physics to anything you could think of.
+
+Fan out sub-agents and have sub-agents tackle each one individually so that the game is utterly perfect. You should /loop on each item and have a separate sub-agent check it visually to ensure it looks triple A. That separate sub-agent should be a really harsh critic, and if it doesn't look triple A, it should keep going.
+
+Don't stop until each sub-agent is utterly wowed with the quality when compared with the actual Call of Duty game. It should literally compare them side by side blind and say which one looks better. Do this in ThreeJS. /loop until it's utterly perfect. Fan out sub-agents and ultracode.
+```
+
+</details>
+
+Why is this a much better brief?
+
+| From a vague wish | To an executable direction |
+| --- | --- |
+| “Make a game” | Build a first-person shooter with a recognizable reference bar: the latest [Call of Duty](https://www.callofduty.com/) games. |
+| “Make it good” | Treat textures, physics, visuals, and the rest of the player experience as a full quality surface. |
+| One agent does everything | Fan out independent workstreams so rendering, combat, level design, AI, UI, audio, and performance can be handled deliberately. |
+| Generate once and ship | Add a repeated implementation → visual review → critique → fix loop. |
+| Trust the builder's opinion | Introduce a separate, deliberately harsh visual critic. |
+| “Looks AAA” | Compare side by side under blind review instead of accepting “looks good” as evidence. |
+| Technology is implicit | Make Three.js part of the contract. |
+| No definition of done | Establish persistence: keep working until the required quality checks pass. |
+
+The important insight is that the prompt does not merely add adjectives. It adds a **production system**: a director's brief, parallel owners, a QA gate, a benchmark, and a feedback loop.
+
+There is one more layer that `prompt-optimizer` adds for real-world execution. The words *perfect* and *AAA* still need a rubric; `/loop` and `ultracode` may not exist in every runtime; and exact parity with a blockbuster commercial game may be infeasible for a small web project. The skill keeps the ambition, then makes it honest and testable:
+
+```text
+If independent agents are available, assign them to isolated workstreams. Otherwise, run the same passes sequentially.
+
+Evaluate the build across rendering, materials, lighting, animation, combat feedback, AI, level readability, audio, accessibility, and performance. Fix must-have failures first.
+
+Use an independent reviewer for each major pass. Continue the review → fix → retest loop until all must-have checks pass or the iteration budget is reached. Report remaining gaps and blockers instead of claiming perfection without evidence.
+```
+
+That is the core promise of this project: turn a sentence that creates excitement into a brief that creates coordinated execution.
+
 ### Contributing
 
 Suggestions and pull requests are welcome. When proposing a change, include a concrete before/after prompt example and explain which ambiguity or failure mode the change addresses. See the [skill source](prompt-optimizer/SKILL.md) and open an [issue](https://github.com/chengjialu8888/Prompt_Optimizer/issues) for discussion.
@@ -200,6 +252,31 @@ Use $prompt-optimizer to:
 - [研究、分析和写作](prompt-optimizer/SKILL.md)；
 - [多 Agent 协作](prompt-optimizer/SKILL.md)；
 - [测试、评审和质量保证](prompt-optimizer/SKILL.md)。
+
+### 游戏案例：从“我要做游戏”到一份真正能开工的制作单
+
+最初只有一句：
+
+```text
+我要做游戏。
+```
+
+这句话能表达愿望，却不能让 Agent 开工。它没有说明要做什么类型、做到什么水平、用什么技术、如何拆任务、谁来验收，以及什么时候算完成。
+
+把它升级成一个雄心版本，信息密度会完全不同。完整的英文案例可以查看[上面的原始游戏 Prompt](#case-study-from-i-want-to-make-a-game-to-a-production-brief)。它明确提出：做一个以最新 [Call of Duty](https://www.callofduty.com/) 为质量参照的第一人称射击游戏，使用 Three.js，并把任务拆给多个 Agent，建立独立视觉审查和 side-by-side 盲测。
+
+它的卖点不是“把 Prompt 写长了”，而是把一个愿望变成了一个小型制作系统：
+
+1. **从题目到类型**：从“做游戏”收敛为 FPS，Agent 不再猜产品形态。
+2. **从形容词到质量面**：把“AAA”映射到材质、物理、光照、动画、战斗反馈、AI、关卡可读性、音频和性能等维度。
+3. **从单线程到工作流**：允许独立 Agent 分工处理渲染、战斗、关卡、AI、UI 和性能，而不是一个 Agent 混在一起写。
+4. **从自我感觉到独立审查**：单独设置一个“严厉的视觉评论者”，强迫结果接受外部视角。
+5. **从“看起来不错”到验收证据**：用 side-by-side 盲测和检查清单判断差距，而不是让 Agent 自己宣布完成。
+6. **从一次交付到质量闭环**：实现 → 检查 → 批评 → 修复 → 回归测试，直到必须项通过。
+
+真正成熟的版本还会进一步把“完美”改成可执行的[质量标准](prompt-optimizer/SKILL.md)，把 `/loop` 和 `ultracode` 改写成运行时无关的迭代行为，并给出明确的停止条件。这样既保留了“我要做出大作品”的野心，也避免无限循环、工具幻觉和无法证明的完美承诺。
+
+一句话总结：**普通 Prompt 让 Agent 知道你想做什么；优化后的 Prompt 让整个执行系统知道如何一起把它做出来。**
 
 ### 项目结构
 
