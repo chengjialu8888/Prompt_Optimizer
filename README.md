@@ -9,6 +9,12 @@ Turn ambitious, vague prompts into clear, executable, and measurable instruction
 
 ## English
 
+### Visual overview
+
+The skill's own thinking model is visualized as a blue-and-white editable whiteboard: intent becomes a task contract, the contract drives execution, and independent validation closes the loop.
+
+![Prompt Optimizer blue-and-white Feishu whiteboard](assets/prompt-optimizer-blue-white-board.jpg)
+
 ### Why this exists
 
 Many prompts sound ambitious but leave the agent to guess what “excellent” means. Phrases such as “make it perfect,” “build it at AAA quality,” or “keep iterating until it feels right” communicate intent, but they do not define scope, evidence, or completion.
@@ -97,6 +103,8 @@ prompt-optimizer/
 ├── SKILL.md              # Core workflow and optimization rules
 └── agents/
     └── openai.yaml       # Skill metadata for Codex interfaces
+assets/
+└── prompt-optimizer-blue-white-board.jpg  # Rendered whiteboard overview
 ```
 
 The skill is intentionally dependency-free. It does not require an API key, runtime package, or external service.
@@ -172,6 +180,12 @@ Suggestions and pull requests are welcome. When proposing a change, include a co
 No license has been added yet. Add a license before redistributing the project or accepting external contributions.
 
 ## 中文
+
+### 可视化总览
+
+这张蓝白风格的[飞书白板思路图](#visual-overview)把整个方法画成一条执行链：高层意图 → 任务契约 → 迭代验证 → 稳定交付，并补充了质量差异化、复杂任务编排和立即使用方式。
+
+![Prompt Optimizer 蓝白飞书白板截图](assets/prompt-optimizer-blue-white-board.jpg)
 
 ### 1 / 为什么做
 
@@ -285,6 +299,8 @@ prompt-optimizer/
 ├── SKILL.md              # 核心工作流与优化规则
 └── agents/
     └── openai.yaml       # Codex skill 元数据
+assets/
+└── prompt-optimizer-blue-white-board.jpg  # 蓝白飞书白板截图
 ```
 
 项目本身没有运行时依赖，不需要 API Key、额外安装包或外部服务。你可以从 [`SKILL.md`](prompt-optimizer/SKILL.md) 查看完整规则，也可以通过 [Issues](https://github.com/chengjialu8888/Prompt_Optimizer/issues) 提交建议。
