@@ -1,5 +1,7 @@
 # Prompt Optimizer
 
+![Prompt Optimizer — from intent to execution](assets/prompt-optimizer-header.png)
+
 [![GitHub](https://img.shields.io/badge/GitHub-chengjialu8888%2FPrompt__Optimizer-181717?logo=github)](https://github.com/chengjialu8888/Prompt_Optimizer)
 [![Skill](https://img.shields.io/badge/Codex%20Skill-prompt--optimizer-6f42c1)](prompt-optimizer/SKILL.md)
 
@@ -104,6 +106,7 @@ prompt-optimizer/
 └── agents/
     └── openai.yaml       # Skill metadata for Codex interfaces
 assets/
+├── prompt-optimizer-header.png         # GitHub README hero image
 └── prompt-optimizer-blue-white-board.jpg  # Rendered whiteboard overview
 ```
 
@@ -300,6 +303,7 @@ prompt-optimizer/
 └── agents/
     └── openai.yaml       # Codex skill 元数据
 assets/
+├── prompt-optimizer-header.png         # GitHub README 头图
 └── prompt-optimizer-blue-white-board.jpg  # 蓝白飞书白板截图
 ```
 
